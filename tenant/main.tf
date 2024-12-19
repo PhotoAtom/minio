@@ -179,7 +179,7 @@ resource "kubernetes_ingress_v1" "minio_ingress" {
     }
     annotations = {
       "cert-manager.io/cluster-issuer" : "${var.cluster_issuer_name}"
-      "cert-manager.io/common-name" : "minio-ingress"
+      "cert-manager.io/common-name" : "${var.host_name}.${var.photoatom_domain}"
       "cert-manager.io/subject-organizations" : "photoatom"
       "cert-manager.io/subject-organizationalunits" : "minio"
       "cert-manager.io/subject-countries" : "India"
