@@ -12,7 +12,7 @@ on:
       - secrets/**
       - tenant/**
       - credentials/**
-      - .github/scripts/**
+      - .github/**
   pull_request:
     paths:
       - certificates/**
@@ -20,7 +20,7 @@ on:
       - secrets/**
       - tenant/**
       - credentials/**
-      - .github/scripts/**
+      - .github/**
     branches:
       - main
     types:
