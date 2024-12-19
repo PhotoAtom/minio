@@ -36,8 +36,7 @@ jobs:
       deployment_name: MinIO Namespace
       folder_path: namespace
       runners: photoatom
-    secrets:
-      KUBECONFIG: ${{ secrets.KUBECONFIG }}
+    secrets: inherit
 
   certificates_deploy:
     needs: [namespace_deploy]
@@ -51,8 +50,7 @@ jobs:
         cd ../.github/scripts
         chmod +x operator-certificate-replicate.sh
         bash ./operator-certificate-replicate.sh
-    secrets:
-      KUBECONFIG: ${{ secrets.KUBECONFIG }}
+    secrets: inherit
 
   secrets_deploy:
     needs: [certificates_deploy]
@@ -62,8 +60,7 @@ jobs:
       deployment_name: MinIO Secrets
       folder_path: secrets
       runners: photoatom
-    secrets:
-      KUBECONFIG: ${{ secrets.KUBECONFIG }}
+    secrets: inherit
 
   tenant_deploy:
     needs: [secrets_deploy]
@@ -73,8 +70,7 @@ jobs:
       deployment_name: MinIO Tenant
       folder_path: tenant
       runners: photoatom
-    secrets:
-      KUBECONFIG: ${{ secrets.KUBECONFIG }}
+    secrets: inherit
 
   credentials_deploy:
     needs: [tenant_deploy]
@@ -88,6 +84,4 @@ jobs:
         cd ../.github/scripts
         chmod +x minio-credentials.sh
         bash ./minio-credentials.sh
-    secrets:
-      KUBECONFIG: ${{ secrets.KUBECONFIG }}
-
+    secrets: inherit
