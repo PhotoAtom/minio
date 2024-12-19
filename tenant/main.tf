@@ -193,7 +193,7 @@ resource "kubernetes_ingress_v1" "minio_ingress" {
   spec {
     ingress_class_name = "nginx"
     tls {
-      hosts       = ["${var.host_name}.{var.photoatom_domain}"]
+      hosts       = ["${var.host_name}.${var.photoatom_domain}"]
       secret_name = "minio-ingress-tls"
     }
     rule {
