@@ -50,18 +50,22 @@ jobs:
         cd ../.github/scripts
         chmod +x operator-certificate-replicate.sh
         bash ./operator-certificate-replicate.sh
+
+        # Wait for MinIO Ingress Certificate to get ready
+        echo "Wait for MinIO Ingress Certificate to get ready"
+        kubectl wait --for=condition=Ready=true certificate/minio-ingress-certificate -n minio --timeout=300s
     secrets: inherit
 
-  # secrets_deploy:
-  #   needs: [certificates_deploy]
-  #   name: MinIO Secrets Deployment onto Self Hosted K3d Cluster
-  #   uses: PhotoAtom/automations/.github/workflows/tofu-deploy.yml@main
-  #   with:
-  #     deployment_name: MinIO Secrets
-  #     folder_path: secrets
-  #     runners: photoatom
-  #   secrets: inherit
-  #
+  secrets_deploy:
+    needs: [certificates_deploy]
+    name: MinIO Secrets Deployment onto Self Hosted K3d Cluster
+    uses: PhotoAtom/automations/.github/workflows/tofu-deploy.yml@main
+    with:
+      deployment_name: MinIO Secrets
+      folder_path: secrets
+      runners: photoatom
+    secrets: inherit
+
   # tenant_deploy:
   #   needs: [secrets_deploy]
   #   name: MinIO Tenant Deployment onto Self Hosted K3d Cluster
