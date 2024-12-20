@@ -116,7 +116,7 @@ resource "kubernetes_secret" "cloudflare_token" {
   type = "Opaque"
 }
 
-// Cloudflare Issuer for Public facing services
+// Cloudflare Issuer for MinIO Ingress Service
 resource "kubernetes_manifest" "minio_public_issuer" {
   manifest = {
     "apiVersion" = "cert-manager.io/v1"
@@ -183,7 +183,7 @@ resource "kubernetes_manifest" "minio_ingress_certificate" {
         "encoding"  = "PKCS1"
         "size"      = "2048"
       }
-      "dnsNames"   = ["storage.photoatom.khatrivarun.xyz"]
+      "dnsNames"   = ["${var.host_name}.${var.photoatom_domain}"]
       "secretName" = "minio-ingress-tls"
       "issuerRef" = {
         "name"  = "minio-public-issuer"

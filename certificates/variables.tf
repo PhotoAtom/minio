@@ -43,3 +43,14 @@ variable "cloudflare_token" {
   sensitive   = true
 }
 
+variable "host_name" {
+  default     = "storage"
+  description = "Host name to be used with MinIO Tenant Ingress"
+}
+
+variable "photoatom_domain" {
+  description = "Domain to be used for Ingress"
+  default     = ""
+  type        = string
+}
+
