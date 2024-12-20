@@ -169,26 +169,26 @@ resource "kubernetes_manifest" "minio_ingress_certificate" {
         "app"       = "minio"
         "component" = "certificate"
       }
-      "spec" = {
-        "duration"    = "2160h"
-        "renewBefore" = "360h"
-        "subject" = {
-          "organizations"       = ["photoatom"]
-          "countries"           = ["India"]
-          "organizationalUnits" = ["MinIO"]
-        }
-        "privateKey" = {
-          "algorithm" = "RSA"
-          "encoding"  = "PKCS1"
-          "size"      = "2048"
-        }
-        "dnsNames"   = ["storage.photoatom.khatrivarun.xyz"]
-        "secretName" = "minio-ingress-tls"
-        "issuerRef" = {
-          "name"  = "minio-public-issuer"
-          "kind"  = "Issuer"
-          "group" = "cert-manager.io"
-        }
+    }
+    "spec" = {
+      "duration"    = "2160h"
+      "renewBefore" = "360h"
+      "subject" = {
+        "organizations"       = ["photoatom"]
+        "countries"           = ["India"]
+        "organizationalUnits" = ["MinIO"]
+      }
+      "privateKey" = {
+        "algorithm" = "RSA"
+        "encoding"  = "PKCS1"
+        "size"      = "2048"
+      }
+      "dnsNames"   = ["storage.photoatom.khatrivarun.xyz"]
+      "secretName" = "minio-ingress-tls"
+      "issuerRef" = {
+        "name"  = "minio-public-issuer"
+        "kind"  = "Issuer"
+        "group" = "cert-manager.io"
       }
     }
   }
