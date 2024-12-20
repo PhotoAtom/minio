@@ -52,36 +52,36 @@ jobs:
         bash ./operator-certificate-replicate.sh
     secrets: inherit
 
-  secrets_deploy:
-    needs: [certificates_deploy]
-    name: MinIO Secrets Deployment onto Self Hosted K3d Cluster
-    uses: PhotoAtom/automations/.github/workflows/tofu-deploy.yml@main
-    with:
-      deployment_name: MinIO Secrets
-      folder_path: secrets
-      runners: photoatom
-    secrets: inherit
-
-  tenant_deploy:
-    needs: [secrets_deploy]
-    name: MinIO Tenant Deployment onto Self Hosted K3d Cluster
-    uses: PhotoAtom/automations/.github/workflows/tofu-deploy.yml@main
-    with:
-      deployment_name: MinIO Tenant
-      folder_path: tenant
-      runners: photoatom
-    secrets: inherit
-
-  credentials_deploy:
-    needs: [tenant_deploy]
-    name: MinIO Credentials Deployment onto Self Hosted K3d Cluster
-    uses: PhotoAtom/automations/.github/workflows/tofu-deploy.yml@main
-    with:
-      deployment_name: MinIO Credentials
-      folder_path: credentials
-      runners: photoatom
-      post_apply_script: |
-        cd ../.github/scripts
-        chmod +x minio-credentials.sh
-        bash ./minio-credentials.sh
-    secrets: inherit
+  # secrets_deploy:
+  #   needs: [certificates_deploy]
+  #   name: MinIO Secrets Deployment onto Self Hosted K3d Cluster
+  #   uses: PhotoAtom/automations/.github/workflows/tofu-deploy.yml@main
+  #   with:
+  #     deployment_name: MinIO Secrets
+  #     folder_path: secrets
+  #     runners: photoatom
+  #   secrets: inherit
+  #
+  # tenant_deploy:
+  #   needs: [secrets_deploy]
+  #   name: MinIO Tenant Deployment onto Self Hosted K3d Cluster
+  #   uses: PhotoAtom/automations/.github/workflows/tofu-deploy.yml@main
+  #   with:
+  #     deployment_name: MinIO Tenant
+  #     folder_path: tenant
+  #     runners: photoatom
+  #   secrets: inherit
+  #
+  # credentials_deploy:
+  #   needs: [tenant_deploy]
+  #   name: MinIO Credentials Deployment onto Self Hosted K3d Cluster
+  #   uses: PhotoAtom/automations/.github/workflows/tofu-deploy.yml@main
+  #   with:
+  #     deployment_name: MinIO Credentials
+  #     folder_path: credentials
+  #     runners: photoatom
+  #     post_apply_script: |
+  #       cd ../.github/scripts
+  #       chmod +x minio-credentials.sh
+  #       bash ./minio-credentials.sh
+  #   secrets: inherit
