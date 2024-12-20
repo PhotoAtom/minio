@@ -29,3 +29,17 @@ variable "kubeconfig_path" {
   default     = "~/.kube/config"
   description = "KubeConfig Path to be used for KubeCTL commands"
 }
+
+
+variable "cloudflare_email" {
+  description = "Email Address to be used for DNS Challenge"
+  type        = string
+  sensitive   = true
+}
+
+variable "cloudflare_token" {
+  description = "Token to be used for DNS Challenge"
+  type        = string
+  sensitive   = true
+}
+
