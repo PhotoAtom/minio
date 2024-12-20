@@ -25,11 +25,7 @@ variable "minio_tenant_certificate_name" {
   description = "Name for the certificate for MinIO Tenant"
 }
 
-variable "kubeconfig_path" {
-  default     = "~/.kube/config"
-  description = "KubeConfig Path to be used for KubeCTL commands"
-}
-
+# ------------ MINIO INGRESS VARIABLES ------------ #
 
 variable "cloudflare_email" {
   description = "Email Address to be used for DNS Challenge"
