@@ -6,9 +6,9 @@ CHECK_TENANT_CERT=$(kubectl get secrets -n minio-operator | grep -c "operator-ca
 if [[ "$CHECK_TENANT_CERT" == "0" ]]
 then
 
-  # Sleep for some time to give time for certs creation
-  echo "Sleeping for 30 seconds to give time for certificates creation"
-  sleep 30
+  # Wait for certs creation
+  echo "Waiting for certificates creation"
+  kubectl wait --for=condition=Ready=true certificate/minio-certmanager-cert -n minio --timeout=300s
 
   # Replicate certificates from MinIO Namespace to Operator Namespace
   echo "Replicating certificates from MinIO Namespace to Operator Namespace if it does not exist"
