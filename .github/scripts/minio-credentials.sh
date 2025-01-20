@@ -61,9 +61,9 @@ function save_credentials_to_minio {
 
 }
 
-# Sleep till Tenant is ready for connections
-echo "Sleeping till Tenant is ready for connections..."
-sleep 60
+# Wait till Tenant is ready for connections
+echo "Waiting till Tenant is ready for connections..."
+kubectl wait --for=jsonpath='{.status.healthStatus}'=green tenants/minio -n minio --timeout=300s
 
 # Setup port forwarding for MinIO
 echo "Setting up port forwarding for MinIO..."
