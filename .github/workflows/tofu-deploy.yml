@@ -47,6 +47,7 @@ jobs:
       folder_path: certificates
       runners: photoatom
       post_apply_script: |
+        # Restart the operator to apply the certificates
         kubectl rollout restart deployments.apps/minio-operator -n minio-operator
         kubectl rollout status deployments.apps/minio-operator -n minio-operator
 
