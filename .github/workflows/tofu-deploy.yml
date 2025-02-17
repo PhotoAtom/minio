@@ -47,9 +47,8 @@ jobs:
       folder_path: certificates
       runners: photoatom
       post_apply_script: |
-        cd ../.github/scripts
-        chmod +x operator-certificate-replicate.sh
-        bash ./operator-certificate-replicate.sh
+        kubectl rollout restart deployments.apps/minio-operator -n minio-operator
+        kubectl rollout status deployments.apps/minio-operator -n minio-operator
 
         # Wait for MinIO Ingress Certificate to get ready
         echo "Wait for MinIO Ingress Certificate to get ready"
