@@ -87,6 +87,12 @@ resource "kubernetes_manifest" "tenant_certificate" {
       }
       "commonName" = "minio"
       "secretName" = "minio-tls"
+      "secretTemplate" = {
+        "annotations" = {
+          "replicator.v1.mittwald.de/replication-allowed"            = "true"
+          "replicator.v1.mittwald.de/replication-allowed-namespaces" = var.minio_operator_namespace
+        }
+      }
       "issuerRef" = {
         "name" = "${var.minio_tenant_issuer_name}"
       }
@@ -94,6 +100,26 @@ resource "kubernetes_manifest" "tenant_certificate" {
   }
 
   depends_on = [kubernetes_manifest.minio_tenant_issuer]
+}
+
+resource "kubernetes_secret" "operator-minio-tls" {
+  metadata {
+    name      = "operator-ca-tls-minio"
+    namespace = var.minio_operator_namespace
+    annotations = {
+      "replicator.v1.mittwald.de/replicate-from" = "minio/minio-tls"
+    }
+  }
+
+  type = "kubernetes.io/tls"
+
+  data = {
+    "tls.key" = ""
+    "tls.crt" = ""
+    "ca.crt"  = ""
+  }
+
+  depends_on = [kubernetes_manifest.tenant_certificate]
 }
 
 
