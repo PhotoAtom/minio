@@ -1,3 +1,10 @@
+# ------------ MINIO OPERATOR VARIABLES ------------ #
+
+variable "minio_operator_namespace" {
+  default     = "minio-operator"
+  description = "Namespace to be used with the MinIO Operator and related resources."
+}
+
 # ------------ MINIO TENANT VARIABLES ------------ #
 
 variable "namespace" {
