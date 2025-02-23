@@ -64,6 +64,7 @@ function save_credentials_to_minio {
 # Wait till Tenant is ready for connections
 echo "Waiting till Tenant is ready for connections..."
 kubectl wait --for=jsonpath='{.status.healthStatus}'=green tenants/minio -n minio --timeout=300s
+sleep 30
 
 # Setup port forwarding for MinIO
 echo "Setting up port forwarding for MinIO..."

@@ -17,6 +17,11 @@ resource "kubernetes_secret" "postgres_backups_access_keys" {
       app       = "minio"
       component = "secret"
     }
+
+    annotations = {
+      "replicator.v1.mittwald.de/replication-allowed"            = "true"
+      "replicator.v1.mittwald.de/replication-allowed-namespaces" = var.postgresql_namespace
+    }
   }
 
   data = {
