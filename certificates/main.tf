@@ -20,7 +20,13 @@ resource "kubernetes_manifest" "minio_tenant_ca" {
       }
       "commonName" = "minio-ca-certificate"
       "secretName" = "minio-ca-certificate-tls"
-      "duration"   = "70128h"
+      "secretTemplate" = {
+        "annotations" = {
+          "replicator.v1.mittwald.de/replication-allowed"            = "true"
+          "replicator.v1.mittwald.de/replication-allowed-namespaces" = var.postgresql_namespace
+        }
+      }
+      "duration" = "70128h"
       "privateKey" = {
         "algorithm" = "ECDSA"
         "size"      = 256

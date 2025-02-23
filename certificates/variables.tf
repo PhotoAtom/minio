@@ -1,3 +1,10 @@
+# ------------ POSTGRESQL VARIABLES ------------ #
+
+variable "postgresql_namespace" {
+  default     = "postgres"
+  description = "Namespace to be used with the PostgreSQL database and related resources"
+}
+
 # ------------ MINIO OPERATOR VARIABLES ------------ #
 
 variable "minio_operator_namespace" {
